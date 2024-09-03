@@ -13,7 +13,16 @@
     {
       devShells.${system} = {
         default = pkgs.mkShell {
-          packages = with pkgs; [ ];
+          shellHook = ''
+            export CPATH="${pkgs.koka}/share/koka/v3.1.2/kklib/include"
+          '';
+          packages = with pkgs; [
+            koka
+            wasmtime
+            emscripten
+            nodePackages.serve
+            cargo-watch
+          ];
         };
       };
 
